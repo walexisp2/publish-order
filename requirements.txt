@@ -1,0 +1,7 @@
+ant-env==1.0.1
+ant-ibmmq==1.1.8
+ant-rabbitmq==1.0.3
+ant-trace==1.0.6
+ant-validator==1.0.5
+pytest==7.0.1
+pytest-cov==3.0.0

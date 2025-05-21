@@ -1,0 +1,7 @@
+name: sinco-publicar-orden
+home: https://dev.azure.com/grupo-exito/GCIT/_git/sinco-publicar-orden
+version: 1.0
+description: Integración con origen colas RabbitMQ (ISOC) y destino colas IBMMQ (SINCO)
+maintainers:
+  - name: Jose Alejandro Devia
+    email: josedevia@seti.com.co

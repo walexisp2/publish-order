@@ -1,0 +1,273 @@
+{
+    "date_format": "%Y-%m-%dT%H:%M:%S.%f",
+    "fields": {
+        "0": {
+            "name": "OrderId",
+            "type": "text",
+            "min_lenght": 1,
+            "max_lenght": 50
+        },
+        "1": {
+            "name": "OrderTypeId",
+            "type": "text",
+            "min_lenght": 1,
+            "max_lenght": 50
+        },
+        "2": {
+            "name": "UpdatedTimestamp",
+            "type": "date",
+            "min_lenght": 1,
+            "max_lenght": 30,
+            "format_out": "%Y%m%d%H%M%S%f"
+        },
+        "3": {
+            "name": "SellingLocationId",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 4
+        },
+        "4": {
+            "name": "IsConfirmed",
+            "type": "bool",
+            "min_lenght": 1,
+            "max_lenght": 5
+        },
+        "5": {
+            "name": "DeliveryMethodId",
+            "type": "text",
+            "min_lenght": 1,
+            "max_lenght": 50
+        },
+        "6": {
+            "name": "ReleaseId",
+            "type": "text",
+            "min_lenght": 1,
+            "max_lenght": 50
+        },
+        "7": {
+            "name": "IntegerCancelledQuantityRelease",
+            "type": "digit",
+            "min_lenght": 1,
+            "max_lenght": 10
+        },
+        "8": {
+            "name": "DecimalCancelledQuantityRelease",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 4
+        },
+        "9": {
+            "name": "IntegerFulfilledQuantityRelease",
+            "type": "digit",
+            "min_lenght": 1,
+            "max_lenght": 10
+        },
+        "10": {
+            "name": "DecimalFulfilledQuantityRelease",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 4
+        },
+        "11": {
+            "name": "IntegerQuantityRelease",
+            "type": "digit",
+            "min_lenght": 1,
+            "max_lenght": 10
+        },
+        "12": {
+            "name": "DecimalQuantityRelease",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 4
+        },
+        "13": {
+            "name": "ItemId",
+            "type": "digit",
+            "min_lenght": 1,
+            "max_lenght": 7
+        },
+        "14": {
+            "name": "MinFulfillmentStatusId",
+            "type": "digit",
+            "min_lenght": 1,
+            "max_lenght": 10
+        },
+        "15": {
+            "name": "OrderLineId",
+            "type": "digit",
+            "min_lenght": 1,
+            "max_lenght": 6
+        },
+        "16": {
+            "name": "IntegerQuantity",
+            "type": "digit",
+            "min_lenght": 1,
+            "max_lenght": 10
+        },
+        "17": {
+            "name": "DecimalQuantity",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 4
+        },
+        "18": {
+            "name": "ShipFromLocationId",
+            "type": "text",
+            "min_lenght": 1,
+            "max_lenght": 16
+        },
+        "19": {
+            "name": "ParentOrderId",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 50
+        },
+        "20": {
+            "name": "IsReturn",
+            "type": "bool",
+            "min_lenght": 0,
+            "max_lenght": 5
+        },
+        "21": {
+            "name": "ShipToLocationId",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 16
+        },
+        "22": {
+            "name": "ItemConditionId",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 50
+        },
+        "23": {
+            "name": "ReturnReason",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 50
+        },
+        "24": {
+            "name": "ProductType",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 5
+        },
+        "25": {
+            "name": "SellingChannelId",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 30
+        },
+        "26": {
+            "name": "OrderCapturedDttm",
+            "type": "date",
+            "min_lenght": 0,
+            "max_lenght": 30,
+            "format_out": "%Y%m%d%H%M%S"
+        },
+        "27": {
+            "name": "NoOfDeliveryLines",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 6
+        },
+        "28": {
+            "name": "CustomerFullName",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 100
+        },
+        "29": {
+            "name": "CustomerId",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 20
+        },
+        "30": {
+            "name": "CustomerPhone",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 20
+        },
+        "31": {
+            "name": "City",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 50
+        },
+        "32": {
+            "name": "PostalCode",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 10
+        },
+        "33": {
+            "name": "State",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 50
+        },
+        "34": {
+            "name": "Country",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 50
+        },
+        "35": {
+            "name": "Address",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 150
+        },
+        "36": {
+            "name": "RequestedDeliveryDate",
+            "type": "date",
+            "min_lenght": 0,
+            "max_lenght": 30,
+            "format_out": "%Y%m%d%H%M%S"
+        },
+        "37": {
+            "name": "TicketNumber",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 20
+        },
+        "38": {
+            "name": "POSTransactionId",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 6
+        },
+        "39": {
+            "name": "TerminalId",
+            "type": "digit",
+            "min_lenght": 0,
+            "max_lenght": 3
+        },
+        "40": {
+            "name": "DeliveryMethodSubType",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 50
+        },
+        "41": {
+            "name": "PackageDetailId",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 20
+        },
+        "42": {
+            "name": "Note",
+            "type": "text",
+            "min_lenght": 0,
+            "max_lenght": 150
+        },
+        "43": {
+            "name": "DateTime",
+            "type": "date",
+            "min_lenght": 0,
+            "max_lenght": 30,
+            "format_out": "%Y%m%d%H%M%S"
+        }
+    }
+}

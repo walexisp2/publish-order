@@ -1,0 +1,106 @@
+# Default values for chart
+
+deploy:
+    nombre: #{nombre}#
+    namespace: #{stage}#-#{namespace}#
+    replicas: #{minReplicas}#
+    type: #{type}#
+    ambiente: #{stage}#
+    aplicacion: #{nombre}#
+    area_negocio: #{namespace}#
+    area_ti: #{area_ti}#
+    pais: #{pais}#
+    imageTag: #{imageTag}#
+    cpulimits: #{cpulimits}#
+    memorylimits: #{memorylimits}#
+    maxReplicas: #{maxReplicas}#
+    minReplicas: #{minReplicas}#
+    environment: #{stage}#
+    _image_name: #{nombre}#
+    imagePullSecrets: #{imagePullSecrets}#
+    path_mountPath: /data1/#{stage}#-#{namespace}#/#{nombre}#/
+    path_hostPath: /data1/#{stage}#-#{namespace}#/#{nombre}#/
+    acrServer: #{ecr}#
+
+secrets:
+    password_rabbit: #{rabbit.password}#
+    password_rabbit_elk: #{elk.pass}#
+    password_ibmmq: #{ibm.password}#
+
+config:
+    name: conf
+    SOURCE_RABBIT: {
+        "operation": "SUBSCRIBER"
+        ,"type": "OUT"
+        ,"domainName": #{stage}#-#{namespace}#
+        ,"message_name": #{nombre}#
+        ,"host": #{rabbit.host}#
+        ,"port": #{rabbit.port}#
+        ,"virtual_host": #{rabbit.virtualHost}#
+        ,"username": #{rabbit.username}#
+        ,"password": ""
+        ,"routing_key": #{source.rabbitmq.routing_key}#
+        ,"exchange": #{source.rabbitmq.exchange}#
+        ,"queues": [
+            {
+                "name": #{source.rabbitmq.queue_name}#
+            }
+        ]
+        ,"connection_name": #{nombre}#
+        ,"time_sleep": #{source.rabbitmq.time_sleep}#
+        ,"exchange_type": #{rabbit.exchangeType}#
+    }
+    TRACEABILITY: {
+        "log_dir": /data1/#{stage}#-#{namespace}#/#{nombre}#/log
+        ,"error_dir": /data1/#{stage}#-#{namespace}#/#{nombre}#/error
+        ,"log_file": #{traceability.log_file}#
+        ,"operation": "PUBLISHER"
+        ,"storage_destination": "RabbitMQ"
+        ,"type": "IN"
+        ,"domain_name": #{stage}#-#{namespace}#
+        ,"message_name": #{nombre}#
+    }
+    RABBITMQ_TRACE: {
+        "host": #{elk.host}#
+        ,"port": #{elk.port}#
+        ,"virtual_host": #{elk.virtualHost}#
+        ,"username": #{elk.username}#
+        ,"password": ""
+        ,"routing_key": #{elk.routingKey}#
+        ,"exchange": #{elk.exchange}#
+        ,"connection_name": #{nombre}#
+        ,"time_sleep": #{target.elk.time_sleep}#
+        ,"exchange_type": #{rabbit.exchangeType}#
+    }
+    FILTERS: {
+        "2000": [true]
+        ,"3000": [true, false]
+        ,"3600": [true, false]
+        ,"7000": [true, false]
+        ,"9000": [true, false]
+        ,"9001": [true, false]
+        ,"11000": [true, false]
+        ,"18000": [true, false]
+        ,"19000": [true, false]
+        ,"3600100": [true, false]
+        ,"3000080": [true, false]
+        ,"3000100": [true, false]
+    }
+    GENERAL: {
+        "start_parallel": #{general.start_parallel}#
+        ,"blocks_output": #{general.blocks_output}#
+        ,"ship_from_location_id_filter": #{general.ship_from_location_id_filter}#
+        ,"ship_to_location_id_filter": #{general.ship_to_location_id_filter}#
+    }
+    TARGET_IBMMQ: {
+        "host": #{ibm.host}#
+        ,"port": #{ibm.port}#
+        ,"queue_manager": #{ibm.queue_manager}#
+        ,"queue_name": #{target.ibm.queue_name}#
+        ,"channel": #{ibm.channel}#
+        ,"mode": #{ibm.mode}#
+        ,"format": #{target.ibm.format}#
+        ,"time_sleep": 10
+        ,"user": #{ibm.user}#
+        ,"password": ""
+    }

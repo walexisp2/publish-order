@@ -1,0 +1,15 @@
+resources:
+  repositories:
+  - repository: templates
+    name: GCIT/arquitectura-documentacion
+    type: git
+
+variables:
+  - template: vars-azure-pipeline.yml
+
+extends:
+  template: pipeline/main.yml@templates
+  parameters:
+      language: python
+      type: worker
+      typerelease: aks

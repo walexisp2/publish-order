@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "configmap-{{.Release.Name}}"
+  namespace: "{{.Values.deploy.namespace}}"
+data:
+    SOURCE_RABBIT.json: {{.Values.config.SOURCE_RABBIT | toJson | quote}}
+    FILTERS.json: {{.Values.config.FILTERS | toJson | quote}}
+    GENERAL.json: {{.Values.config.GENERAL | toJson | quote}}
+    TARGET_IBMMQ.json: {{.Values.config.TARGET_IBMMQ | toJson | quote}}
+    TRACEABILITY.json: {{.Values.config.TRACEABILITY | toJson | quote}}
+    RABBITMQ_TRACE.json: {{.Values.config.RABBITMQ_TRACE | toJson | quote}}

@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{.Release.Name}}"
+  namespace: "{{.Values.deploy.namespace}}"
+spec:
+  replicas: {{ default 1 .Values.deploy.replicas }}
+  selector:
+    matchLabels:
+        type: "{{.Values.deploy.type}}"
+        ambiente: "{{.Values.deploy.ambiente}}"
+        app: "{{.Values.deploy.ambiente}}-{{.Release.Name}}"
+        aplicacion: "{{.Release.Name}}"
+        area.negocio: "{{.Values.deploy.area_negocio}}"
+        area.ti: "{{.Values.deploy.area_ti}}"
+        pais: "{{.Values.deploy.pais}}"
+        version: v{{.Values.deploy.imageTag}}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        type: "{{.Values.deploy.type}}"
+        ambiente: "{{.Values.deploy.ambiente}}"
+        app: "{{.Values.deploy.ambiente}}-{{.Release.Name}}"
+        aplicacion: "{{.Release.Name}}"
+        area.negocio: "{{.Values.deploy.area_negocio}}"
+        area.ti: "{{.Values.deploy.area_ti}}"
+        pais: "{{.Values.deploy.pais}}"
+        version: v{{.Values.deploy.imageTag}}
+    spec:
+      containers:
+      - image: "{{.Values.deploy.acrServer}}/{{.Values.deploy.ambiente}}-{{.Release.Name}}:{{.Values.deploy.imageTag}}"
+        name: "{{.Release.Name}}"
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsUser: 15555
+          runAsGroup: 15555
+          privileged: false
+          allowPrivilegeEscalation: false
+        env:
+          - name: HOME
+            value: "{{.Values.deploy.path_mountPath}}"
+          - name: SOURCE_RABBIT
+            valueFrom:
+              configMapKeyRef:
+                name: "configmap-{{.Release.Name}}"
+                key: SOURCE_RABBIT.json
+          - name: FILTERS
+            valueFrom:
+              configMapKeyRef:
+                name: "configmap-{{.Release.Name}}"
+                key: FILTERS.json
+          - name: GENERAL
+            valueFrom:
+              configMapKeyRef:
+                name: "configmap-{{.Release.Name}}"
+                key: GENERAL.json
+          - name: TARGET_IBMMQ
+            valueFrom:
+              configMapKeyRef:
+                name: "configmap-{{.Release.Name}}"
+                key: TARGET_IBMMQ.json
+          - name: TRACEABILITY
+            valueFrom:
+              configMapKeyRef:
+                name: "configmap-{{.Release.Name}}"
+                key: TRACEABILITY.json
+          - name: RABBITMQ_TRACE
+            valueFrom:
+              configMapKeyRef:
+                name: "configmap-{{.Release.Name}}"
+                key: RABBITMQ_TRACE.json
+          - name: PASSWORD_RABBIT
+            valueFrom:
+              secretKeyRef:
+                name: "secret-{{.Release.Name}}"
+                key: PASSWORD_RABBIT
+          - name: PASSWORD_RABBIT_ELK
+            valueFrom:
+              secretKeyRef:
+                name: "secret-{{.Release.Name}}"
+                key: PASSWORD_RABBIT_ELK
+          - name: PASSWORD_IBMMQ
+            valueFrom:
+              secretKeyRef:
+                name: "secret-{{.Release.Name}}"
+                key: PASSWORD_IBMMQ
+        volumeMounts:
+        - name: tz-colombia
+          mountPath: /etc/localtime
+        - mountPath: {{.Values.deploy.path_mountPath}}
+          name: "{{.Release.Name}}-volume"
+        resources:
+          limits:
+            cpu: "{{.Values.deploy.cpulimits}}m"
+            memory: "{{.Values.deploy.memorylimits}}Mi"
+          requests:
+            cpu: "{{div .Values.deploy.cpulimits 8}}m"
+            memory: "{{div .Values.deploy.memorylimits 4}}Mi"
+      volumes:
+      - name: tz-colombia
+        hostPath:
+            path: /usr/share/zoneinfo/America/Bogota
+
+      - name: "{{.Release.Name}}-volume"
+        hostPath:
+            path: {{.Values.deploy.path_hostPath}}
+            type: Directory
+      restartPolicy: Always
+      imagePullSecrets:
+        - name: {{.Values.deploy.imagePullSecrets}}
+status: {}

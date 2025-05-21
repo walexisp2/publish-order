@@ -1,0 +1,80 @@
+{
+    "SOURCE_RABBIT": {
+        "connection_name": "publish_order_oms",
+        "ssl": false,
+        "domainName": "qa-promo",
+        "exchange": "qa-sinco.publicar.orden",
+        "message_name": "sinco-publicar-orden",
+        "host": "localhost",
+        "port": 5672,
+        "virtual_host": "/",
+        "username": "guest",
+        "password": "guest",
+        "exchange_type": "topic",
+        "routing_key": "publish.order.sinco",
+        "operation": "SUBSCRIBER",
+        "queues": [
+            {
+                "name": "publishorder.oms.queue"
+            }
+        ],
+        "time_sleep": 1,
+        "total_attempts": 3
+    },
+    "FILTERS": {
+        "2000": [true],
+        "3000": [true, false],
+        "3600": [true, false],
+        "7000": [true, false],
+        "9000": [true, false],
+        "9001": [true, false],
+        "11000": [true, false],
+        "18000": [true, false],
+        "19000": [true, false],
+        "3600100": [true, false],
+        "3000080": [true, false],
+        "3000100": [true, false]
+    },
+    "GENERAL": {
+        "ship_from_location_id_filter": ["MARKETPLACE"],
+        "ship_to_location_id_filter": ["MARKETPLACE"],
+        "start_parallel": 1,
+        "blocks_output": 30
+    },
+    "TRACEABILITY": {
+        "log_dir": "config/",
+        "error_dir": "config/",
+        "log_file": "bus.log",
+        "storage_destination": "RabbitMQ",
+        "operation": "SUBSCRIBER",
+        "type": "OUT",
+        "domain_name": "dev-oms",
+        "message_name": "sinco-publicar-orden"
+    },
+    "RABBITMQ_TRACE":{
+        "connection_name": "sinco-publicar-orden",
+        "exchange": "traceability.exchange",
+        "exchange_type": "topic",
+        "host": "elegant-badger.rmq.cloudamqp.com",
+        "password": "3w7PagW3codTdcuf5kgvJxoHiMpc9bJK",
+        "port": "5671",
+        "routing_key": "traceability.queue",
+        "virtual_host": "qa",
+        "username": "qa",
+        "time_sleep": 20,
+        "total_attempts": 10,
+        "ssl": true
+    },
+    "TARGET_IBMMQ": {
+        "host": "10.2.101.43",
+        "port": "1430",
+        "queue_manager": "QMEXITODEV1",
+        "queue_name": "publishOrderIsoc.sinco.queue",
+        "channel": "SYSTEM.ADMIN.SVRCONN",
+        "mode": "client",
+        "user": "test",
+        "password": "u0W2uBaL*.2020*",
+        "format": "MQFMT_STRING",
+        "time_sleep": 10
+    }
+}
